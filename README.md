@@ -6,5 +6,5 @@ This module implements functions to retrieve data from the WoW section of the AP
 
 To install the module, use `luarocks install luabnet_wow` or copy the contents of the `lua` directory to your `package.path`.
 
-For more information on dependencies, please see the luabnet_tools README here:
-https://github.com/Choonster/luabnet_tools/blob/master/README.md
+Some dependencies must be installed manually. For more information, please see the Dependencies section of the luabnet_tools README here:
+https://github.com/Choonster/luabnet_tools#dependencies
