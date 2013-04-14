@@ -1,8 +1,8 @@
-﻿--- Blizzard Battle.net Community Platform API Library
+﻿--- Blizzard Battle.net Community Platform API Library.
 -- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- @class: module
--- @name: bnet.wow.battlepet
 -- Implements the Battle Pet section of the API.
+-- @module bnet.wow.battlepet
+-- @alias wow
 
 --[[
 This is just here so LuaDoc recognises this as a module.

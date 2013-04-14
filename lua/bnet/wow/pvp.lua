@@ -1,8 +1,8 @@
---- Blizzard Battle.net Community Platform API Library
+--- Blizzard Battle.net Community Platform API Library.
 -- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- @class: module
--- @name: bnet.wow.pvp
 -- Implements the PVP Resources section of the API.
+-- @module bnet.wow.pvp
+-- @alias wow
 
 --[[
 This is just here so LuaDoc recognises this as a module.
@@ -37,8 +37,9 @@ end
 -- @param page (number, optional) Which page of results to return (defaults to 1)
 -- @param size (number, optional) How many results to return per page (defaults to 50)
 -- @param ascending (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.
+-- @param locale (string, optional) The locale to retrieve the data in.
 -- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
-function wow:GetArenaLadder(battlegroup, teamSize, page, size, ascending, locale forceRefresh)
+function wow:GetArenaLadder(battlegroup, teamSize, page, size, ascending, locale, forceRefresh)
 	battlegroup = battlegroup:lower()
 	local teamSizeStr = teamSize .. "v" .. teamSize
 	
@@ -57,6 +58,7 @@ end
 -- @param page (number, optional) Which page of results to return (defaults to 1)
 -- @param size (number, optional) How many results to return per page (defaults to 50)
 -- @param ascending (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.
+-- @param locale (string, optional) The locale to retrieve the data in.
 -- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
 function wow:GetRatedBGLadder(page, size, ascending, locale, forceRefresh)
 	local pageStr = page and ("&page=%d"):format(page) or ""

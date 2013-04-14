@@ -1,13 +1,8 @@
---- Blizzard Battle.net Community Platform API Library
+--- Blizzard Battle.net Community Platform API Library.
 -- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- @class: module
--- @name: bnet.wow.character
 -- Implements the Character Resources section of the API.
-
---[[
-This is just here so LuaDoc recognises this as a module.
-module("bnet.wow.character")
-]]
+-- @module bnet.wow.character
+-- @alias wow
 
 local wow, url_absolute, debugprint, wipe, createRef, decompress, splitPath, joinPath, Get, Set, GetCache, SetCache = ...
 

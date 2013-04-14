@@ -1,8 +1,8 @@
---- Blizzard Battle.net Community Platform API Library
+--- Blizzard Battle.net Community Platform API Library.
 -- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- @class: module
--- @name: bnet.wow
 -- This module is used to create new copies of the main library.
+-- @module bnet.wow
+-- @alias wow
 
 --[[
 This is just here so LuaDoc recognises this as a module.
