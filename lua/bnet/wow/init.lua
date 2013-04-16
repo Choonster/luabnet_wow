@@ -1,18 +1,15 @@
---- Blizzard Battle.net Community Platform API Library.
--- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- This module is used to create new copies of the main library.
--- @module bnet.wow
--- @alias wow
-
---[[
-This is just here so LuaDoc recognises this as a module.
-module("bnet.wow")
-]]
-
+--- Creates new copies of the library.
+-- This documentation only covers the arguments and return types of the library's methods. See the [API documentation](http://blizzard.github.io/api-wow-docs/) for full explanation of the returned data and query fields.
+--
+-- All methods that send a request to the API decode the JSON into the equivalent Lua table structures and then return a read-only proxy to the decoded data.
+-- This proxy is a regular table with its __index, __pairs and __ipairs metamethods pointing to the original data.
+-- Access to nested tables also returns a proxy rather than the raw table.
+-- @module Main
+-- @alias wowbase
 
 local unpack = unpack
 
-local tablex = require("pl.tablex")
+local deepcopy = require("pl.tablex").deepcopy
 local url_absolute = require("socket.url").absolute
 
 local toolsbase = require("bnet.tools")
@@ -24,15 +21,19 @@ local Get, Set, GetCache, SetCache, InitCache, GetCacheTable, SetCacheTable = un
 local GAME = "wow"
 
 local modules = {
-	"character",
-	"guild",
-	"realm",
+	"achievement",
 	"auction",
+	"battlepet",
+	"challengemode",
+	"character",
+	"data",
+	"guild",
 	"item",
 	"pvp",
-	"data",
 	"quest",
+	"realm",
 	"recipe",
+	"spell",
 }
 
 local wow = tablex.deepcopy(tools)
@@ -59,29 +60,30 @@ local meta = {
 local wowbase = {}
 
 --- Create a new copy of the library.
--- <br /><br />
+--
 -- Optionally use an existing table and register your public/private application keys (given to you by Blizzard).
 -- If you don't register your keys here, you can register them later with wow:RegisterKeys.
--- <br /><br />
--- Each copy of the library will have a full set of methods from each each sub-module as well as all methods from the tools module.
--- <br /><br />
+--
+-- Each copy of the library will have a full set of methods from each each sub-module as well as all methods from the [tools](http://choonster.github.com/luabnet_tools) module.
+--
 -- You will be unable to set the value of keys used by library methods.
--- @param base A table to use as the base of the new copy. (table, optional)
--- @param publicKey Your public application key. (string, optional)
--- @param privateKey Your private application key. (string, optional)
--- @return wow: A new copy of the library. (table)
+--
+-- @tparam[opt] table base A table to use as the base of the new copy.
+-- @string[opt] publicKey Your public application key.
+-- @string[opt] privateKey Your private application key.
+-- @treturn table wow: A new copy of the library.
 -- @usage local wowbase = require("bnet.wow")
--- <br />local wow = wowbase:New(nil, "xxxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxx") -- Create a new copy without an existing base table and register your keys.
--- <br /><br />local success, auctionData, code, status, headers = wow:GetAuctionData("Frostmourne") -- Retrieve auction data for the Frostmourne realm.
--- <br />assert(success, auctionData) -- If the request failed, auctionData will contain the reason for failure instead of the query result.
--- <br />for k, v in pairs(auctionData) do
--- <br />	print(k, v)
--- <br />end
+-- local wow = wowbase:New(nil, "xxxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxx") -- Create a new copy without an existing base table and register your keys.
+-- local success, auctionData, code, status, headers = wow:GetAuctionData("Frostmourne") -- Retrieve auction data for the Frostmourne realm.
+-- assert(success, auctionData) -- If the request failed, auctionData will contain the reason for failure instead of the query result.
+-- for k, v in pairs(auctionData) do
+-- 	print(k, v)
+-- end
 -- @usage local wowbase = require("bnet.wow")
--- <br />local t = { stuff = "more stuff" }
--- <br />t = wowbase:New(t)
+-- local t = { stuff = "more stuff" }
+-- t = wowbase:New(t)
 -- -- Create a new copy of the module using the existing table t as the base. This preserves any existing data in t.
--- <br /><br />assert(t.stuff == "more stuff")
+-- assert(t.stuff == "more stuff")
 function wowbase:New(base, publicKey, privateKey)
 	base = base or {}
 	base = setmetatable(base, meta)

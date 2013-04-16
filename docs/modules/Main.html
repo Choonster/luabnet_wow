@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>luabnet_wow Documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>luabnet_wow</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><strong>Main</strong></li>
+  <li><a href="../modules/achievement.html">achievement</a></li>
+  <li><a href="../modules/auction.html">auction</a></li>
+  <li><a href="../modules/battlepet.html">battlepet</a></li>
+  <li><a href="../modules/challengemode.html">challengemode</a></li>
+  <li><a href="../modules/character.html">character</a></li>
+  <li><a href="../modules/data.html">data</a></li>
+  <li><a href="../modules/guild.html">guild</a></li>
+  <li><a href="../modules/item.html">item</a></li>
+  <li><a href="../modules/pvp.html">pvp</a></li>
+  <li><a href="../modules/quest.html">quest</a></li>
+  <li><a href="../modules/realm.html">realm</a></li>
+  <li><a href="../modules/recipe.html">recipe</a></li>
+  <li><a href="../modules/spell.html">spell</a></li>
+</ul>
+<h2>Topics</h2>
+<ul>
+  <li><a href="../topics/readme.md.html">readme.md</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>Main</code></h1>
+
+<p>Creates new copies of the library.</p>
+<p> This documentation only covers the arguments and return types of the library's methods. See the <a href="http://blizzard.github.io/api-wow-docs/">API documentation</a> for full explanation of the returned data and query fields.</p>
+
+<p> All methods that send a request to the API decode the JSON into the equivalent Lua table structures and then return a read-only proxy to the decoded data.
+ This proxy is a regular table with its __index, __pairs and __ipairs metamethods pointing to the original data.
+ Access to nested tables also returns a proxy rather than the raw table.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#wowbase:New">wowbase:New&nbsp;( [base [, publicKey [, privateKey]]])</a></td>
+	<td class="summary">Create a new copy of the library.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "wowbase:New"></a>
+    <strong>wowbase:New&nbsp;( [base [, publicKey [, privateKey]]])</strong>
+    </dt>
+    <dd>
+    Create a new copy of the library. </p>
+
+<p> Optionally use an existing table and register your public/private application keys (given to you by Blizzard).
+ If you don't register your keys here, you can register them later with wow:RegisterKeys.</p>
+
+<p> Each copy of the library will have a full set of methods from each each sub-module as well as all methods from the <a href="http://choonster.github.com/luabnet_tools">tools</a> module.</p>
+
+<p> You will be unable to set the value of keys used by library methods.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">base</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A table to use as the base of the new copy.</li>
+        <li><span class="parameter">publicKey</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Your public application key.</li>
+        <li><span class="parameter">privateKey</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Your private application key.</li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+          <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+        wow: A new copy of the library.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <li><pre class="example"> <span class="keyword">local</span> wowbase = <span class="global">require</span>(<span class="string">"bnet.wow"</span>)
+ <span class="keyword">local</span> wow = wowbase:New(<span class="keyword">nil</span>, <span class="string">"xxxxxxxxxxxxxxxxx"</span>, <span class="string">"xxxxxxxxxxxxxxxxx"</span>) <span class="comment">-- Create a new copy without an existing base table and register your keys.
+</span> <span class="keyword">local</span> success, auctionData, code, status, headers = wow:GetAuctionData(<span class="string">"Frostmourne"</span>) <span class="comment">-- Retrieve auction data for the Frostmourne realm.
+</span> <span class="global">assert</span>(success, auctionData) <span class="comment">-- If the request failed, auctionData will contain the reason for failure instead of the query result.
+</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(auctionData) <span class="keyword">do</span>
+ 	<span class="global">print</span>(k, v)
+ <span class="keyword">end</span></pre></li>
+        <li><pre class="example"> <span class="keyword">local</span> wowbase = <span class="global">require</span>(<span class="string">"bnet.wow"</span>)
+ <span class="keyword">local</span> t = { stuff = <span class="string">"more stuff"</span> }
+ t = wowbase:New(t)
+ <span class="comment">-- Create a new copy of the module using the existing table t as the base. This preserves any existing data in t.
+</span> <span class="global">assert</span>(t.stuff == <span class="string">"more stuff"</span>)</pre></li>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

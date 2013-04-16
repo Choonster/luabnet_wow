@@ -1,13 +1,5 @@
---- Blizzard Battle.net Community Platform API Library.
--- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- Implements the PVP Resources section of the API.
--- @module bnet.wow.pvp
+--- Implements the PvP section of the API
 -- @alias wow
-
---[[
-This is just here so LuaDoc recognises this as a module.
-module("bnet.wow.pvp")
-]]
 
 local wow, url_absolute, debugprint, wipe, createRef, decompress, splitPath, joinPath, Get, Set, GetCache, SetCache = ...
 
@@ -15,12 +7,18 @@ local HALF_HOUR = 0.5 * 60 * 60 -- Number of seconds in half an hour
 
 
 --- Retrieve arena team information.
--- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
--- @param realm (string) The realm of the team.
--- @param teamSize (number) The size of the team. For a 2v2 team, use 2 as the team size.
--- @param team (string) The name of the team.
--- @param locale (string, optional) The locale to retrieve the data in.
--- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
+-- @string realm The realm of the team.
+-- @number teamSize The size of the team. For a 2v2 team, use 2 as the team size.
+-- @string team The name of the team.
+-- @string[opt] locale The locale to retrieve the data in.
+-- @bool[opt] forceRefresh If true, send a request regardless of cached results.
+-- @treturn bool success: Did the query succeed?
+-- @treturn tab result: The decoded JSON data.
+-- @treturn number code: The HTTP response status code. If no request was sent, this will be 304.
+-- @treturn string status: The full HTTP response status. If no request was sent, this will be "No request sent".
+-- @treturn table headers: The HTTP headers of the response. If no request was sent, this will be nil.
+-- @treturn number time: The number of seconds between the function being called and the results being returned, calculated with os.time().
+-- @treturn number clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().
 function wow:GetArenaTeamInfo(realm, teamSize, team, locale, forceRefresh)
 	realm, team = realm:lower(), team:lower()
 	local teamSizeStr = teamSize .. "v" .. teamSize
@@ -31,14 +29,20 @@ function wow:GetArenaTeamInfo(realm, teamSize, team, locale, forceRefresh)
 end
 
 --- Retrieve the Arena Ladder for the battlegroup.
--- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
--- @param battlegroup (string) The Battlegroup to query.
--- @param teamSize (number) The size of the team. For a 2v2 team, use 2 as the team size.
--- @param page (number, optional) Which page of results to return (defaults to 1)
--- @param size (number, optional) How many results to return per page (defaults to 50)
--- @param ascending (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.
--- @param locale (string, optional) The locale to retrieve the data in.
--- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
+-- @string battlegroup The Battlegroup to query.
+-- @number teamSize The size of the team. For a 2v2 team, use 2 as the team size.
+-- @number[opt=1] page Which page of results to return
+-- @number[opt=50] size How many results to return per page
+-- @bool[opt=true] ascending Whether to return the results in ascending order. Defaults to true if omitted.
+-- @string[opt] locale The locale to retrieve the data in.
+-- @bool[opt] forceRefresh If true, send a request regardless of cached results.
+-- @treturn bool success: Did the query succeed?
+-- @treturn tab result: The decoded JSON data.
+-- @treturn number code: The HTTP response status code. If no request was sent, this will be 304.
+-- @treturn string status: The full HTTP response status. If no request was sent, this will be "No request sent".
+-- @treturn table headers: The HTTP headers of the response. If no request was sent, this will be nil.
+-- @treturn number time: The number of seconds between the function being called and the results being returned, calculated with os.time().
+-- @treturn number clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().
 function wow:GetArenaLadder(battlegroup, teamSize, page, size, ascending, locale, forceRefresh)
 	battlegroup = battlegroup:lower()
 	local teamSizeStr = teamSize .. "v" .. teamSize
@@ -54,12 +58,18 @@ function wow:GetArenaLadder(battlegroup, teamSize, page, size, ascending, locale
 end
 
 --- Retrieve the Rated Battleground Ladder for the region.
--- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
--- @param page (number, optional) Which page of results to return (defaults to 1)
--- @param size (number, optional) How many results to return per page (defaults to 50)
--- @param ascending (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.
--- @param locale (string, optional) The locale to retrieve the data in.
--- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
+-- @number[opt=1] page Which page of results to return
+-- @number[opt=50] size How many results to return per page
+-- @bool[opt=true] ascending Whether to return the results in ascending order.
+-- @string[opt] locale The locale to retrieve the data in.
+-- @bool[opt] forceRefresh If true, send a request regardless of cached results.
+-- @treturn bool success: Did the query succeed?
+-- @treturn tab result: The decoded JSON data.
+-- @treturn number code: The HTTP response status code. If no request was sent, this will be 304.
+-- @treturn string status: The full HTTP response status. If no request was sent, this will be "No request sent".
+-- @treturn table headers: The HTTP headers of the response. If no request was sent, this will be nil.
+-- @treturn number time: The number of seconds between the function being called and the results being returned, calculated with os.time().
+-- @treturn number clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().
 function wow:GetRatedBGLadder(page, size, ascending, locale, forceRefresh)
 	local pageStr = page and ("&page=%d"):format(page) or ""
 	local sizeStr = size and ("&size=%d"):format(size) or ""

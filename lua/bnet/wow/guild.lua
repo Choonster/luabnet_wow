@@ -1,25 +1,23 @@
---- Blizzard Battle.net Community Platform API Library.
--- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- Implements the Guild Resources section of the API.
--- @module bnet.wow.guild
+--- Implements the Guild section of the API
 -- @alias wow
-
---[[
-This is just here so LuaDoc recognises this as a module.
-module("bnet.wow.guild")
-]]
 
 local wow, url_absolute, debugprint, wipe, createRef, decompress, splitPath, joinPath, Get, Set, GetCache, SetCache = ...
 
 local HALF_HOUR = 0.5 * 60 * 60 -- Number of seconds in half an hour
 
 --- Retrieve a guild profile table.
--- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
--- @param realm (string) The realm of the guild.
--- @param guild (string) The name of the guild.
--- @param fields (string, optional) A list of comma-separated fields to query.
--- @param locale (string, optional) The locale to retrieve the data in.
--- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
+-- @string realm The realm of the guild.
+-- @string guild The name of the guild.
+-- @string[opt] fields A list of comma-separated fields to query.
+-- @string[opt] locale The locale to retrieve the data in.
+-- @bool[opt] forceRefresh If true, send a request regardless of cached results.
+-- @treturn bool success: Did the query succeed?
+-- @treturn tab result: The decoded JSON data.
+-- @treturn number code: The HTTP response status code. If no request was sent, this will be 304.
+-- @treturn string status: The full HTTP response status. If no request was sent, this will be "No request sent".
+-- @treturn table headers: The HTTP headers of the response. If no request was sent, this will be nil.
+-- @treturn number time: The number of seconds between the function being called and the results being returned, calculated with os.time().
+-- @treturn number clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().
 function wow:GetGuildProfile(realm, guild, fields, locale, forceRefresh)
 	realm, guild = realm:lower(), guild:lower()
 	local cachePath = joinPath(realm, guild, fields)

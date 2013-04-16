@@ -1,13 +1,5 @@
---- Blizzard Battle.net Community Platform API Library
--- Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
--- Implements the Auction Resources section of the API.
--- @module bnet.wow.auction
+--- Implements the Auction section of the API
 -- @alias wow
-
---[[
-This is just here so LuaDoc recognises this as a module.
-module("bnet.wow.auction")
-]]
 
 local wow, url_absolute, debugprint, wipe, createRef, decompress, splitPath, joinPath, Get, Set, GetCache, SetCache = ...
 
@@ -55,9 +47,8 @@ end
 --]]
 
 -- Get the path section of an absolute URL. (no longer public)
--- Primarily used in :GetAuctionData to convert an absolute URL returned by :GetAuctionDataURL into a path for :SendRequestRaw.
--- @param URL (string) An absolute URL. Must contain the current host as returned by :GetHost.
--- @return path: (string) The path section of the URL.
+-- @string URL An absolute URL. Must contain the current host as returned by :GetHost.
+-- @treturn string path: The path section of the URL.
 local function GetPath(self, URL)
 	debugprint("URL:", URL)
 	return match(URL, self:GetHost() .. "(%/.+)$")
@@ -65,9 +56,16 @@ end
 
 --- Retrieve an auction data dump.
 -- Due to the extremely large size of these dumps, this request will often take a long time to process. Using a faster decompression library will speed this up slightly.
--- <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
--- @param realm (string) The realm to get auction data for.
--- @param forceRefresh (boolean, optional) If true, send a request regardless of cached results.
+-- @string realm The realm to get auction data for.
+-- @bool[opt] forceRefresh If true, send a request regardless of cached results.
+-- @treturn bool success: Did the query succeed?
+-- @treturn tab result: The decoded JSON data.
+-- @treturn number code: The HTTP response status code. If no request was sent, this will be 304.
+-- @treturn string status: The full HTTP response status. If no request was sent, this will be "No request sent".
+-- @treturn table headers: The HTTP headers of the response. If no request was sent, this will be nil.
+-- @treturn number time: The number of seconds between the function being called and the results being returned, calculated with os.time().
+-- @treturn number clock: The number of seconds of CPU time used between the function being called and the results being returned, calculated with os.clock().
+-- @treturn string aucRequestType: Which request the status and headers refer to. If the URL request returned a 200 (HTTP OK) status code, this will be "data" (because a request was sent for the data). If the URL request returned a 304 (HTTP Not Modified or no request sent) or any other status code, this will be "url" (because no request was sent for the data).
 function wow:GetAuctionData(realm, forceRefresh)
 	local startTime = time()
 	local startClock = clock()
@@ -92,19 +90,17 @@ function wow:GetAuctionData(realm, forceRefresh)
 	
 	if code == 200 then -- If both the URL and data requests returned 200, set success to true and cache the result
 		success = true
-		print("request success")
-		--result = splitAndDecode(resultJSON)
+		debugprint("request success")
 		SetCache(self, reqType, dataPath, result)
 	elseif code == 304 then -- If the URL request returned 304 (HTTP Not Modified or no request sent), set success to true and return the cached result
 		success = true
-		print(304, status)
+		debugprint(304, status)
 		result = GetCache(self, reqType, dataPath)
 	else -- If either the URL or data request returned a different status, set success to false
 		success = false
-		print("request failed")
+		debugprint("request failed")
 		result = result or aucURL -- Depending on which request failed, either result or aucURL will be an error message
 	end
-	--]]
 	
 	return success, createRef(result), code, status, headers, difftime(time(), startTime), difftime(clock(), startClock), aucRequestType
 end

@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/Main.html">Main</a></li>
+  <li><a href="../modules/achievement.html">achievement</a></li>
+  <li><a href="../modules/auction.html">auction</a></li>
+  <li><a href="../modules/battlepet.html">battlepet</a></li>
+  <li><strong>bnet.wow.data</strong></li>
+  <li><a href="../modules/challengemode.html">challengemode</a></li>
+  <li><a href="../modules/character.html">character</a></li>
+  <li><a href="../modules/guild.html">guild</a></li>
+  <li><a href="../modules/item.html">item</a></li>
+  <li><a href="../modules/pvp.html">pvp</a></li>
+  <li><a href="../modules/quest.html">quest</a></li>
+  <li><a href="../modules/realm.html">realm</a></li>
+  <li><a href="../modules/recipe.html">recipe</a></li>
+  <li><a href="../modules/spell.html">spell</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>bnet.wow.data</code></h1>
+
+<p>Blizzard Battle.net Community Platform API Library.</p>
+<p>
+ Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
+ Implements the Data Resources section of the API</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetBattlegroups">wow:GetBattlegroups&nbsp;(forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of Battlegroups.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetCharacterRaces">wow:GetCharacterRaces&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of character races.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetCharacterClasses">wow:GetCharacterClasses&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of character classes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetCharacterAchievements">wow:GetCharacterAchievements&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of character achievements.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetGuildRewards">wow:GetGuildRewards&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of guild rewards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetGuildPerks">wow:GetGuildPerks&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of guild perks.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetGuildAchievements">wow:GetGuildAchievements&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of guild achievements.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetItemClasses">wow:GetItemClasses&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of item classes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetTalents">wow:GetTalents&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of talents, specs and glyphs for each class.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetBattlePetTypes">wow:GetBattlePetTypes&nbsp;(locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve a list of battle pet types (including what they are strong and weak against).</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "wow:GetBattlegroups"></a>
+    <strong>wow:GetBattlegroups&nbsp;(forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of Battlegroups.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetCharacterRaces"></a>
+    <strong>wow:GetCharacterRaces&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of character races.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetCharacterClasses"></a>
+    <strong>wow:GetCharacterClasses&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of character classes.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetCharacterAchievements"></a>
+    <strong>wow:GetCharacterAchievements&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of character achievements.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetGuildRewards"></a>
+    <strong>wow:GetGuildRewards&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of guild rewards.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetGuildPerks"></a>
+    <strong>wow:GetGuildPerks&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of guild perks.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetGuildAchievements"></a>
+    <strong>wow:GetGuildAchievements&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of guild achievements.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetItemClasses"></a>
+    <strong>wow:GetItemClasses&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of item classes.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetTalents"></a>
+    <strong>wow:GetTalents&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of talents, specs and glyphs for each class.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetBattlePetTypes"></a>
+    <strong>wow:GetBattlePetTypes&nbsp;(locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve a list of battle pet types (including what they are strong and weak against).
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the locale and forceRefresh parameters.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

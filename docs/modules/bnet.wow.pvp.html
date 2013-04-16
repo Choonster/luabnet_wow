@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul>
+  <li><a href="../modules/battlepet.html">battlepet</a></li>
+  <li><a href="../modules/bnet.wow.html">bnet.wow</a></li>
+  <li><a href="../modules/bnet.wow.achievement.html">bnet.wow.achievement</a></li>
+  <li><a href="../modules/bnet.wow.auction.html">bnet.wow.auction</a></li>
+  <li><a href="../modules/bnet.wow.challengemode.html">bnet.wow.challengemode</a></li>
+  <li><a href="../modules/bnet.wow.character.html">bnet.wow.character</a></li>
+  <li><a href="../modules/bnet.wow.data.html">bnet.wow.data</a></li>
+  <li><a href="../modules/bnet.wow.guild.html">bnet.wow.guild</a></li>
+  <li><a href="../modules/bnet.wow.item.html">bnet.wow.item</a></li>
+  <li><strong>bnet.wow.pvp</strong></li>
+  <li><a href="../modules/bnet.wow.quest.html">bnet.wow.quest</a></li>
+  <li><a href="../modules/bnet.wow.realm.html">bnet.wow.realm</a></li>
+  <li><a href="../modules/bnet.wow.recipe.html">bnet.wow.recipe</a></li>
+  <li><a href="../modules/bnet.wow.spell.html">bnet.wow.spell</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>bnet.wow.pvp</code></h1>
+
+<p>Blizzard Battle.net Community Platform API Library.</p>
+<p>
+ Easily retrieve various types of data from Blizzard's API in the format of Lua tables.
+ Implements the PVP Resources section of the API.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetArenaTeamInfo">wow:GetArenaTeamInfo&nbsp;(realm, teamSize, team, locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve arena team information.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetArenaLadder">wow:GetArenaLadder&nbsp;(battlegroup, teamSize, page, size, ascending, locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve the Arena Ladder for the battlegroup.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wow:GetRatedBGLadder">wow:GetRatedBGLadder&nbsp;(page, size, ascending, locale, forceRefresh)</a></td>
+	<td class="summary">Retrieve the Rated Battleground Ladder for the region.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+    <dl class="function">
+    <dt>
+    <a name = "wow:GetArenaTeamInfo"></a>
+    <strong>wow:GetArenaTeamInfo&nbsp;(realm, teamSize, team, locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve arena team information.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">realm</span>
+         (string) The realm of the team.</li>
+        <li><span class="parameter">teamSize</span>
+         (number) The size of the team. For a 2v2 team, use 2 as the team size.</li>
+        <li><span class="parameter">team</span>
+         (string) The name of the team.</li>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetArenaLadder"></a>
+    <strong>wow:GetArenaLadder&nbsp;(battlegroup, teamSize, page, size, ascending, locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve the Arena Ladder for the battlegroup.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">battlegroup</span>
+         (string) The Battlegroup to query.</li>
+        <li><span class="parameter">teamSize</span>
+         (number) The size of the team. For a 2v2 team, use 2 as the team size.</li>
+        <li><span class="parameter">page</span>
+         (number, optional) Which page of results to return (defaults to 1)</li>
+        <li><span class="parameter">size</span>
+         (number, optional) How many results to return per page (defaults to 50)</li>
+        <li><span class="parameter">ascending</span>
+         (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.</li>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wow:GetRatedBGLadder"></a>
+    <strong>wow:GetRatedBGLadder&nbsp;(page, size, ascending, locale, forceRefresh)</strong>
+    </dt>
+    <dd>
+    Retrieve the Rated Battleground Ladder for the region.
+ <br/> See :SendRequest for return values. See :SendRequest and :SendRequestRaw for more information on the forceRefresh parameter.
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">page</span>
+         (number, optional) Which page of results to return (defaults to 1)</li>
+        <li><span class="parameter">size</span>
+         (number, optional) How many results to return per page (defaults to 50)</li>
+        <li><span class="parameter">ascending</span>
+         (boolean, optional) Whether to return the results in ascending order. Defaults to true if omitted.</li>
+        <li><span class="parameter">locale</span>
+         (string, optional) The locale to retrieve the data in.</li>
+        <li><span class="parameter">forceRefresh</span>
+         (boolean, optional) If true, send a request regardless of cached results.</li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.3</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
