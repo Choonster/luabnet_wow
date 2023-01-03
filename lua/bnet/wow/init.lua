@@ -14,9 +14,9 @@ local url_absolute = require("socket.url").absolute
 
 local toolsbase = require("bnet.tools")
 local tools = toolsbase.module
-local debugprint, wipe, createRef, decompress, splitPath, joinPath = unpack(toolsbase.publicFuncs)
+local debugprint, wipe, createProxy, decompress, splitPath, joinPath, assertString, assertNumber = unpack(toolsbase.publicFuncs)
 local privateFuncs = assert(toolsbase["wow&&privateFuncs"], "Unable to load private functions.") -- We need to access the privateFuncs key using the wow&& prefix due to metamethod restrictions.
-local Get, Set, GetCache, SetCache, InitCache, GetCacheTable, SetCacheTable = unpack(privateFuncs)
+local Get, Set, GetCache, SetCache, InitCache, GetCacheTable, SetCacheTable, ResetCacheTable = unpack(privateFuncs)
 
 local GAME = "wow"
 
@@ -36,9 +36,9 @@ local modules = {
 	"spell",
 }
 
-local wow = tablex.deepcopy(tools)
+local wow = deepcopy(tools)
 
-local funcTable = {wow, url_absolute, debugprint, wipe, createRef, decompress, splitPath, joinPath, Get, Set, GetCache, SetCache}
+local funcTable = {wow, url_absolute, debugprint, wipe, createProxy, decompress, splitPath, joinPath, assertString, assertNumber, Get, Set, GetCache, SetCache}
 for _, name in ipairs(modules) do
 	local path = assert(package.searchpath("bnet.wow.".. name, package.path)) -- Find the path to each module file. This is standard in 5.2 and implemented by Penlight utils in 5.1
 	local func = assert(loadfile(path, "t")) -- Lua 5.1 will ignore the second argument, Lua 5.2 uses it as the mode ("t" is text only, no binary chunks).
@@ -62,13 +62,14 @@ local wowbase = {}
 --- Create a new copy of the library.
 --
 -- Optionally use an existing table and register your public/private application keys (given to you by Blizzard).
+-- If the existing table has a metatable, it will be replaced.
 -- If you don't register your keys here, you can register them later with wow:RegisterKeys.
---
+-- 
 -- Each copy of the library will have a full set of methods from each each sub-module as well as all methods from the [tools](http://choonster.github.com/luabnet_tools) module.
 --
 -- You will be unable to set the value of keys used by library methods.
 --
--- @tparam[opt] table base A table to use as the base of the new copy.
+-- @tparam[opt] table base A table to use as the base of the new copy. 
 -- @string[opt] publicKey Your public application key.
 -- @string[opt] privateKey Your private application key.
 -- @treturn table wow: A new copy of the library.
